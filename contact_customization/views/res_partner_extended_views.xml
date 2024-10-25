@@ -1,0 +1,134 @@
+<odoo>
+
+    <!-- Tree View for res.partner.extended -->
+    <record id="view_res_partner_extended_tree" model="ir.ui.view">
+        <field name="name">res.partner.extended.tree</field>
+        <field name="model">res.partner.extended</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="is_vip"/>
+                <field name="loyalty_points"/>
+                <field name="preferred_language_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form View for res.partner.extended -->
+    <record id="view_res_partner_extended_form" model="ir.ui.view">
+        <field name="name">res.partner.extended.form</field>
+        <field name="model">res.partner.extended</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="secondary_email"/>
+                            <field name="date_first_contact"/>
+                            <field name="birthday_reminder"/>
+                        </group>
+                        <group>
+                            <field name="social_facebook"/>
+                            <field name="social_twitter"/>
+                            <field name="social_linkedin"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="loyalty_points"/>
+                            <field name="preferred_language_id"/>
+                            <field name="is_vip"/>
+                            <field name="region"/>
+                            <field name="partner_rating"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View for res.partner.extended -->
+    <record id="view_res_partner_extended_kanban" model="ir.ui.view">
+        <field name="name">res.partner.extended.kanban</field>
+        <field name="model">res.partner.extended</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="is_vip"/>
+                <field name="partner_rating"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <!-- VIP field with a boolean toggle widget -->
+                            <field name="is_vip" widget="boolean_toggle"/>
+                            <strong><field name="name"/></strong>
+
+                            <!-- Display VIP tag only if is_vip is True -->
+                            <div t-if="record.is_vip.raw_value">
+                                VIP
+                            </div>
+
+                            <!-- Display partner rating if it exists -->
+                            <div t-if="record.partner_rating and record.partner_rating.raw_value">
+                                <t t-esc="record.partner_rating.raw_value"/>/5 Rating
+                            </div>
+
+                            <!-- Display Facebook only if the value exists -->
+                            <div t-if="record.social_facebook and record.social_facebook.raw_value">
+                                <t t-esc="record.social_facebook.raw_value"/> Facebook
+                            </div>
+
+                            <!-- Display Twitter only if the value exists -->
+                            <div t-if="record.social_twitter and record.social_twitter.raw_value">
+                                <t t-esc="record.social_twitter.raw_value"/> Twitter
+                            </div>
+
+                            <!-- Display LinkedIn only if the value exists -->
+                            <div t-if="record.social_linkedin and record.social_linkedin.raw_value">
+                                <t t-esc="record.social_linkedin.raw_value"/> LinkedIn
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- Search View for res.partner.extended -->
+    <record id="view_res_partner_extended_search" model="ir.ui.view">
+        <field name="name">res.partner.extended.search</field>
+        <field name="model">res.partner.extended</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="secondary_email" string="Secondary Email"/>
+                <field name="social_facebook" string="Facebook"/>
+                <field name="social_twitter" string="Twitter"/>
+                <field name="social_linkedin" string="LinkedIn"/>
+                <field name="preferred_language_id" string="Preferred Language"/>
+                <field name="partner_rating" string="Rating"/>
+                <filter string="VIP" name="is_vip" domain="[('is_vip', '=', True)]"/>
+                <filter string="Non-VIP" name="non_vip" domain="[('is_vip', '=', False)]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Region" name="region" context="{'group_by':'region'}"/>
+                    <filter string="Preferred Language" name="preferred_language_group" context="{'group_by':'preferred_language_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for res.partner.extended -->
+    <record id="action_res_partner_extended_new" model="ir.actions.act_window">
+        <field name="name">Partners</field>
+        <field name="res_model">res.partner.extended</field>
+        <field name="view_mode">tree,form,kanban,search</field>
+    </record>
+</odoo>

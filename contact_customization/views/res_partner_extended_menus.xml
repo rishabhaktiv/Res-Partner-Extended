@@ -1,0 +1,13 @@
+<odoo>
+
+    <!-- Menu for res.partner.extended -->
+    <menuitem id="menu_config_res_partner_extended"
+        name="Res partner extended"
+        parent="contacts.res_partner_menu_config"
+        sequence="10"/>
+
+    <menuitem id="menu_action_res_bank_extended"
+        action="action_res_partner_extended_new"
+        parent="menu_config_res_partner_extended"
+        sequence="1"/>
+</odoo>

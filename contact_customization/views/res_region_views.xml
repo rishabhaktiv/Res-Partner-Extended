@@ -1,0 +1,49 @@
+<odoo>
+
+    <!-- Tree View for res.region -->
+    <record id="view_res_region_tree" model="ir.ui.view">
+        <field name="name">res.region.tree.view</field>
+        <field name="model">res.region</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="region_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form View for res.region -->
+    <record id="view_res_region_form" model="ir.ui.view">
+        <field name="name">res.region.form.view</field>
+        <field name="model">res.region</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="region_name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for res.partner.extended -->
+    <record id="action_res_region" model="ir.actions.act_window">
+        <field name="name">Regions</field>
+        <field name="res_model">res.region</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu for res.partner.extended -->
+    <menuitem id="menu_config_res_region"
+        name="Res Region"
+        parent="contacts.res_partner_menu_config"
+        sequence="20"/>
+
+    <menuitem id="menu_action_res_region"
+        action="action_res_region"
+        parent="menu_config_res_region"
+        sequence="1"/>
+</odoo>

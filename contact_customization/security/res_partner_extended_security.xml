@@ -1,0 +1,7 @@
+<odoo>
+    <!-- Define the Group -->
+    <record id="group_vip_manager" model="res.groups">
+        <field name="name">VIP Manager</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+</odoo>
