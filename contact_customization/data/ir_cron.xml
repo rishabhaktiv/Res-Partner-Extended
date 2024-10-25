@@ -1,0 +1,11 @@
+<odoo>
+    <record id="ir_cron_res_partner_extended" model="ir.cron">
+        <field name="name">Birthday Reminder</field>
+        <field name="model_id" ref="contact_customization.model_res_partner_extended"/>
+        <field name="state">code</field>
+        <field name="code">model.action_send_email()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>
